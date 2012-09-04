@@ -2,9 +2,11 @@ package Cicindela::Config::_common;
 use strict;
 use vars qw(%C);
 *Config = \%C;
+use File::Spec;
+use File::Basename qw(dirname);
 
-$C{CICINDELA_HOME} = '/home/cicindela';
-$C{LOG_CONF} = $C{CICINDELA_HOME}. '/etc/log.conf';
+$C{CICINDELA_HOME}    = File::Spec->rel2abs(File::Spec->catdir(dirname(__FILE__), '..','..','..'));
+$C{LOG_CONF}          = $C{CICINDELA_HOME}. '/etc/log.conf';
 $C{FILTERS_NAMESPACE} = 'Cicindela::Filters';
 
 $C{DEFAULT_DATASOURCE} = [ 'dbi:mysql:cicindela;host=localhost', 'root', '' ];
