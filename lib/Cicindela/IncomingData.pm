@@ -93,11 +93,6 @@ sub insert_pick {
         or db_error;
 }
 
-sub delete_pick {
-    my ($self, $user_id, $item_id) = @_;
-    $self->insert_pick($user_id, $item_id, 1);
-}
-
 sub insert_uninterested {
     my ($self, $user_id, $item_id, $is_delete) = @_;
 
