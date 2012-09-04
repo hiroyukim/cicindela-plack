@@ -7,8 +7,6 @@ use lib File::Spec->catdir(dirname(__FILE__), 'lib');
 use Plack::Builder;
 use Cicindela::Request;
 use Cicindela::Recommender;
-use Data::Dumper;
-use DBI;
 use Carp ();
 use Try::Tiny;
 
