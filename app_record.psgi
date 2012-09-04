@@ -41,8 +41,8 @@ builder {
                 elsif ($req->param('op') eq 'insert_rating' and defined($req->param('user_id')) and defined($req->param('item_id')) and defined($req->param('rating'))) {
                     $recommender->insert_rating($req->param('user_id'), $req->param('item_id'), $req->param('rating'));
                 } 
-                elsif ($req->param('op') eq 'insert_tag' and defined($q{tag_id}) and defined($req->param('user_id')) and defined($req->param('item_id'))) {
-                    $recommender->insert_tag($q{tag_id}, $req->param('user_id'), $req->param('item_id'));
+                elsif ($req->param('op') eq 'insert_tag' and defined($req->param('tag_id')) and defined($req->param('user_id')) and defined($req->param('item_id'))) {
+                    $recommender->insert_tag($req->param('tag_id'), $req->param('user_id'), $req->param('item_id'));
                 } 
                 elsif ($req->param('op') eq 'set_category' and defined($req->param('category_id')) and defined($req->param('item_id'))) {
                     $recommender->insert_category($req->param('category_id'), $req->param('item_id'));
@@ -57,11 +57,11 @@ builder {
                 elsif ($req->param('op') eq 'delete_rating' and defined($req->param('user_id')) and defined($req->param('item_id'))) {
                     $recommender->delete_rating($req->param('user_id'), $req->param('item_id'));
                 } 
-                elsif ($req->param('op') eq 'delete_tag' and defined($q{tag_id}) and defined($req->param('user_id')) and defined($req->param('item_id'))) {
-                    $recommender->delete_tag($q{tag_id}, $req->param('user_id'), $req->param('item_id'));
+                elsif ($req->param('op') eq 'delete_tag' and defined($req->param('tag_id')) and defined($req->param('user_id')) and defined($req->param('item_id'))) {
+                    $recommender->delete_tag($req->param('tag_id'), $req->param('user_id'), $req->param('item_id'));
                 } 
-                elsif ($req->param('op') eq 'remove_category' and defined($q{category_id}) and defined($req->param('item_id'))) {
-                    $recommender->delete_category($q{category_id}, $req->param('item_id'));
+                elsif ($req->param('op') eq 'remove_category' and defined($req->param('category_id')) and defined($req->param('item_id'))) {
+                    $recommender->delete_category($req->param('category_id'), $req->param('item_id'));
                 }
                 else {
                     return [400,['Content-type' => 'text/plain'],['']];
