@@ -17,15 +17,15 @@ builder {
     sub {
         my $req = Cicindela::Request->new(shift);
 
-        my $d;
+        my $recommender;
         if ( $req->param('set') ) {
-            $d = $RECOMMENDERS->{$req->param('set')} = Cicindela::Recommender->get_instance_for_set($req->param('set'));
+            $recommender = $RECOMMENDERS->{$req->param('set')} = Cicindela::Recommender->get_instance_for_set($req->param('set'));
 
-            unless ($d) {
+            unless ($recommender) {
                 return [400,['Content-type' => 'text/plain'],['']];
             }
             
-            $RECOMMENDERS->{$req->param('set')} = $d;
+            $RECOMMENDERS->{$req->param('set')} = $recommender;
         }
         
         my $optional_fields = { map { $_ => $req->param($_) ||'' } qw(limit category_id) };
@@ -33,11 +33,11 @@ builder {
         try {
             if( defined $req->param('op') ) {
                 if ( $req->param('op') eq 'for_item') {
-                    $list = $d->output_recommend_for_item($req->param('item_id'), $optional_fields);
+                    $list = $recommender->output_recommend_for_item($req->param('item_id'), $optional_fields);
                 } elsif ($req->param('op') eq 'for_user') {
-                    $list = $d->output_recommend_for_user($req->param('user_id'), $optional_fields);
+                    $list = $recommender->output_recommend_for_user($req->param('user_id'), $optional_fields);
                 } elsif ($req->param('op') eq 'similar_users') {
-                    $list = $d->output_similar_users($req->param('user_id'), $optional_fields); 
+                    $list = $recommender->output_similar_users($req->param('user_id'), $optional_fields); 
                 }
             } else {
                 return [400,['Content-type' => 'text/plain'],['']];
